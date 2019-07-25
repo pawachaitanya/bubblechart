@@ -137,7 +137,7 @@ export default class BubbleChart extends Component {
       .style("stroke-width", () => {
         return valueFont.lineWeight ? valueFont.lineWeight : 0;
       })
-      .text(function(d) { return d.value; });
+      .text(function(d) { return "$"+d.value; });
 
     node.append("text")
       .attr("class", "label-text")
