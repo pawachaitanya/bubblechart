@@ -104,14 +104,14 @@ export default class BubbleChart extends Component {
 
     node.append("circle")
       .attr("id", function(d) { return d.id; })
-      .attr("r", function(d) { return d.r - (d.r * .04); })
+      .attr("r", function(d) { return d.r*0.5 - (d.r*0.5 * .04); })
       .style("fill", function(d) { return d.data.color ? d.data.color : color(nodes.indexOf(d)); })
       .style("z-index", 1)
       .on('mouseover', function(d) {
-        d3.select(this).attr("r", d.r * 1.04);
+        d3.select(this).attr("r", (d.r*0.5) * 1.04);
       })
       .on('mouseout', function(d) {
-        const r = d.r - (d.r * 0.04);
+        const r = d.r*0.5 - (d.r*0.5 * 0.04);
         d3.select(this).attr("r", r);
       });
 
@@ -172,7 +172,7 @@ export default class BubbleChart extends Component {
     .style("opacity", function(d) {
       const self = d3.select(this);
       const width = self.node().getBBox().width;
-      d.hideLabel = width*1.05 > (d.r*2);
+      d.hideLabel = width*1.05 > (d.r*0.5*2);
       return d.hideLabel ? 0 : 1;
     })
     .attr("y", function(d) {
@@ -221,10 +221,10 @@ export default class BubbleChart extends Component {
         return `translate(0,${offset})`;
       })
       .on('mouseover', function(d) {
-        d3.select('#' + d.id).attr("r", d.r * 1.04);
+        d3.select('#' + d.id).attr("r", d.r*0.5 * 1.04);
       })
       .on('mouseout', function(d) {
-        const r = d.r - (d.r * 0.04);
+        const r = d.r*0.5 - (d.r*0.5 * 0.04);
         d3.select('#' + d.id).attr("r", r);
       })
       .on("click", function(d) {
